@@ -56,6 +56,11 @@ public class WebController {
 		return "OK-CS480-Demo";
 	}
 
+	@RequestMapping(value = "/cs4800/thana", method = RequestMethod.GET)
+	String testThana() {
+		return "Test Thana is a success.";
+	}
+	
 	/**
 	 * This is a simple example of how to use a data manager
 	 * to retrieve the data and return it as an HTTP response.
