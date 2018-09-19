@@ -57,7 +57,7 @@ public class WebController implements ErrorController{
 		// You can replace this with other string,
 		// and run the application locally to check your changes
 		// with the URL: http://localhost:8080/
-		return "CS480 DEMO STATUS: Running";
+		return "CS4800 DEMO STATUS: Running";
 	}
 	@RequestMapping(value = "/cs4800/nguyen", method = RequestMethod.GET)
 	String nguyenPing() {
