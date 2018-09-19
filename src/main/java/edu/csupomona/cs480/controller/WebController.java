@@ -64,7 +64,16 @@ public class WebController implements ErrorController{
 		return "This is added by Michael Nguyen";
 	}
 
-	
+	@RequestMapping(value = "/cs4800/thana", method = RequestMethod.GET)
+	String testThana() {
+		return "Test Thana is a success.";
+	}
+
+	@RequestMapping(value = "/cs4800/michael", method = RequestMethod.GET)
+	String michaelCheck() {
+		return "Michael's get request worked!";
+	}
+
 	/**
 	 * This is a simple example of how to use a data manager
 	 * to retrieve the data and return it as an HTTP response.
@@ -151,7 +160,7 @@ public class WebController implements ErrorController{
 	}
 	
 	/**
-	 * This method is to resolve the ErrorController interface
+	 * This method is to resolve the ErrorController interface.
 	 */
 	@Override
 	public String getErrorPath() {
