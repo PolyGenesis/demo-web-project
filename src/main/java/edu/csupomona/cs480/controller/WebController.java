@@ -163,10 +163,6 @@ public class WebController implements ErrorController{
 	 */
 	@RequestMapping(value = errorPATH)
 	String returnError() {
-		/** 
-		* Return an error message when the user tries to 
-		* access an invalid page.
-		*/
 		return "This page either does not exist or you are not authorized to access this page.";
 	}
 
