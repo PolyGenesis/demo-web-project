@@ -16,6 +16,12 @@ import edu.csupomona.cs480.data.User;
 import edu.csupomona.cs480.data.provider.GpsProductManager;
 import edu.csupomona.cs480.data.provider.UserManager;
 
+//Added imports for the error handling
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.springframework.boot.autoconfigure.web.ErrorAttributes;
+import org.springframework.boot.autoconfigure.web.ErrorController;
+
 
 /**
  * This is the controller used by Spring framework.
@@ -26,7 +32,7 @@ import edu.csupomona.cs480.data.provider.UserManager;
  */
 
 @RestController
-public class WebController {
+public class WebController implements ErrorController{
 
 	/**
 	 * When the class instance is annotated with
@@ -40,6 +46,8 @@ public class WebController {
 	private UserManager userManager;
 	@Autowired
 	private GpsProductManager gpsProductManager;
+	private ErrorAttributes errorAttributes;
+	private static final String errorPATH = "/error";
 
 	/**
 	 * This is a simple example of how the HTTP API works.
@@ -48,12 +56,12 @@ public class WebController {
 	 * in your web browser, type the link:
 	 * 	http://localhost:8080/cs480/ping
 	 */
-	@RequestMapping(value = "/cs580/ping", method = RequestMethod.GET)
+	@RequestMapping(value = "/cs480/ping", method = RequestMethod.GET)
 	String healthCheck() {
 		// You can replace this with other string,
 		// and run the application locally to check your changes
 		// with the URL: http://localhost:8080/
-		return "OK-CS480-Demo";
+		return "CS480 DEMO STATUS: Running";
 	}
 
 	@RequestMapping(value = "/cs4800/thana", method = RequestMethod.GET)
@@ -149,6 +157,23 @@ public class WebController {
 		ModelAndView modelAndView = new ModelAndView("home");
 		modelAndView.addObject("users", listAllUsers());
 		return modelAndView;
+	}
+	
+	/**
+	 * This method is to resolve the ErrorController interface
+	 */
+	@Override
+	public String getErrorPath() {
+		return errorPATH;
+	}
+	
+	/**
+	 * This method displays an error message when the user 
+	 * requests an incorrect URL. 
+	 */
+	@RequestMapping(value = errorPATH)
+	String returnError() {
+		return "This page either does not exist or you are not authorized to access this page.";
 	}
 
 }
