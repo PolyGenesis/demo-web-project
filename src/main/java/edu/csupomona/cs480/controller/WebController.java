@@ -17,9 +17,6 @@ import edu.csupomona.cs480.data.provider.GpsProductManager;
 import edu.csupomona.cs480.data.provider.UserManager;
 
 //Added imports for the error handling
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.springframework.boot.autoconfigure.web.ErrorAttributes;
 import org.springframework.boot.autoconfigure.web.ErrorController;
 
 
@@ -46,7 +43,6 @@ public class WebController implements ErrorController{
 	private UserManager userManager;
 	@Autowired
 	private GpsProductManager gpsProductManager;
-	private ErrorAttributes errorAttributes;
 	private static final String errorPATH = "/error";
 
 	/**
@@ -56,14 +52,19 @@ public class WebController implements ErrorController{
 	 * in your web browser, type the link:
 	 * 	http://localhost:8080/cs480/ping
 	 */
-	@RequestMapping(value = "/cs480/ping", method = RequestMethod.GET)
+	@RequestMapping(value = "/cs4800/ping", method = RequestMethod.GET)
 	String healthCheck() {
 		// You can replace this with other string,
 		// and run the application locally to check your changes
 		// with the URL: http://localhost:8080/
 		return "CS480 DEMO STATUS: Running";
 	}
+	@RequestMapping(value = "/cs4800/nguyen", method = RequestMethod.GET)
+	String nguyenPing() {
+		return "This is added by Michael Nguyen";
+	}
 
+	
 	/**
 	 * This is a simple example of how to use a data manager
 	 * to retrieve the data and return it as an HTTP response.
@@ -74,7 +75,7 @@ public class WebController implements ErrorController{
 	 * Try it in your web browser:
 	 * 	http://localhost:8080/cs480/user/user101
 	 */
-	@RequestMapping(value = "/cs480/user/{userId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/cs4800/user/{userId}", method = RequestMethod.GET)
 	User getUser(@PathVariable("userId") String userId) {
 		User user = userManager.getUser(userId);
 		return user;
@@ -98,7 +99,7 @@ public class WebController implements ErrorController{
 	 * @param major
 	 * @return
 	 */
-	@RequestMapping(value = "/cs480/user/{userId}", method = RequestMethod.POST)
+	@RequestMapping(value = "/cs4800/user/{userId}", method = RequestMethod.POST)
 	User updateUser(
 			@PathVariable("userId") String id,
 			@RequestParam("name") String name,
@@ -116,7 +117,7 @@ public class WebController implements ErrorController{
 	 *
 	 * @param userId
 	 */
-	@RequestMapping(value = "/cs480/user/{userId}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/cs4800/user/{userId}", method = RequestMethod.DELETE)
 	void deleteUser(
 			@PathVariable("userId") String userId) {
 		userManager.deleteUser(userId);
@@ -127,12 +128,12 @@ public class WebController implements ErrorController{
 	 *
 	 * @return
 	 */
-	@RequestMapping(value = "/cs480/users/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/cs4800/users/list", method = RequestMethod.GET)
 	List<User> listAllUsers() {
 		return userManager.listAllUsers();
 	}
 	
-	@RequestMapping(value = "/cs480/gps/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/cs4800/gps/list", method = RequestMethod.GET)
 	List<GpsProduct> listGpsProducts() {
 		return gpsProductManager.listAllGpsProducts();
 	}
@@ -142,7 +143,7 @@ public class WebController implements ErrorController{
 	 * This method provide a simple web UI for you to test the different
 	 * functionalities used in this web service.
 	 */
-	@RequestMapping(value = "/cs480/home", method = RequestMethod.GET)
+	@RequestMapping(value = "/cs4800/home", method = RequestMethod.GET)
 	ModelAndView getUserHomepage() {
 		ModelAndView modelAndView = new ModelAndView("home");
 		modelAndView.addObject("users", listAllUsers());
