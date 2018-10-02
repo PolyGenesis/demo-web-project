@@ -18,6 +18,8 @@ import edu.csupomona.cs480.data.provider.UserManager;
 
 //Added imports for the error handling
 import org.springframework.boot.autoconfigure.web.ErrorController;
+//Added for 3rd Party Math Library
+import com.google.common.math.IntMath;
 
 
 /**
@@ -157,6 +159,11 @@ public class WebController implements ErrorController{
 		ModelAndView modelAndView = new ModelAndView("home");
 		modelAndView.addObject("users", listAllUsers());
 		return modelAndView;
+	}
+
+	@RequestMapping(value = "/cs4800/guavatest", method = RequestMethod.GET)
+	String greatestCommonDivisor() {
+		return ("This uses Google Guava's Math library. \n Greatest common divisor of 5 and 1230 is...\n" + IntMath.gcd(5,1230));
 	}
 	
 	/**
